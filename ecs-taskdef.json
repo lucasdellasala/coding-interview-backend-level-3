@@ -6,7 +6,7 @@
   ],
   "cpu": "256",
   "memory": "512",
-  "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::741448938336:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "name": "my-hapi-container",
