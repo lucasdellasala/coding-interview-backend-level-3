@@ -41,3 +41,5 @@ Eres el Senior Developer de tu equipo en El Dorado, y te han dado la responsabil
 7. PROFIT
 
 ### Cualquier duda contactarme a https://www.linkedin.com/in/andreujuan/
+
+Solution by @lucasdellasala
