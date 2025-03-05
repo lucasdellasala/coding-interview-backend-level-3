@@ -1,0 +1,59 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build_and_push_to_ecr:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 2. Instalar Node (opcional si usas Node en tu build/test)
+      - name: Use Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # 3. Instalar dependencias y ejecutar tus pruebas
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm run test
+
+      # 4. Configurar credenciales de AWS (usa tus secretos)
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      # 5. Login en ECR (acción oficial de AWS)
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # 6. Build de la imagen
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t 741448938336.dkr.ecr.us-east-2.amazonaws.com/coding-interview-backend-level-3:${{ github.sha }} \
+            .
+
+      # 7. Push de la imagen a ECR
+      - name: Push Docker image
+        run: |
+          docker push 741448938336.dkr.ecr.us-east-2.amazonaws.com/coding-interview-backend-level-3:${{ github.sha }}
+
+      # 8. (Opcional) Despliegue a ECS o similar
+      - name: Deploy to ECS
+        # Aquí no hacemos nada aún, lo veremos en el siguiente paso.
+        run: echo "Desplegando a ECS..."
