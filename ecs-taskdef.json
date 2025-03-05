@@ -22,10 +22,6 @@
         {
           "name": "DATABASE_URL",
           "valueFrom": "arn:aws:secretsmanager:us-east-2:741448938336:secret:database_url-QXuT3a"
-        },
-        {
-          "name": "JWT_SECRET",
-          "valueFrom": "arn:aws:secretsmanager:us-east-2:741448938336:secret:jwt_secret-3N3VUB"
         }
       ],
       "essential": true,
