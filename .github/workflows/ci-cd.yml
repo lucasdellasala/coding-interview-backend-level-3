@@ -54,6 +54,14 @@ jobs:
           docker push 741448938336.dkr.ecr.us-east-2.amazonaws.com/coding-interview-backend-level-3:${{ github.sha }}
 
       # 8. (Opcional) Despliegue a ECS o similar
+      - name: Render ECS task definition
+        run: |
+          sed -i "s|<IMAGE>|741448938336.dkr.ecr.us-east-2.amazonaws.com/coding-interview-backend-level-3:${{ github.sha }}|g" ecs-taskdef.json
+      
       - name: Deploy to ECS
-        # Aquí no hacemos nada aún, lo veremos en el siguiente paso.
-        run: echo "Desplegando a ECS..."
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ecs-taskdef.json
+          service: my-ecs-service
+          cluster: my-ecs-cluster
+          wait-for-service-stability: true
