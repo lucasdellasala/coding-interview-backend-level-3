@@ -1,7 +1,7 @@
+/* global module */
 module.exports = {
-    transform: {
+  transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
-    },
-    setupFiles: ['<rootDir>/jest.setup.js'],
-   }
-   
+  },
+  setupFiles: ['<rootDir>/jest.setup.js'],
+};

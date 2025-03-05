@@ -8,6 +8,17 @@ import {
   deleteItem,
 } from '../controllers/item.controller';
 
+interface FailActionDetail {
+  context: {
+    key: string;
+  };
+  message: string;
+}
+
+interface FailActionError {
+  details: FailActionDetail[];
+}
+
 export const itemRoutes: ServerRoute[] = [
   {
     method: 'GET',
@@ -34,10 +45,12 @@ export const itemRoutes: ServerRoute[] = [
           }),
         }),
         failAction: (_, h, err) => {
-          const errors = (err as any)?.details.map((detail: any) => ({
-            field: detail.context.key,
-            message: detail.message,
-          }));
+          const errors = (err as unknown as FailActionError)?.details.map(
+            (detail: FailActionDetail) => ({
+              field: detail.context.key,
+              message: detail.message,
+            }),
+          );
           return h.response({ errors }).code(400).takeover();
         },
       },
@@ -58,10 +71,12 @@ export const itemRoutes: ServerRoute[] = [
           .min(1)
           .unknown(false),
         failAction: (_, h, err) => {
-          const errors = (err as any)?.details.map((detail: any) => ({
-            field: detail.context.key,
-            message: detail.message,
-          }));
+          const errors = (err as unknown as FailActionError)?.details.map(
+            (detail: FailActionDetail) => ({
+              field: detail.context.key,
+              message: detail.message,
+            }),
+          );
           return h.response({ errors }).code(400).takeover();
         },
       },

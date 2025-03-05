@@ -30,9 +30,7 @@ export const initializeServer = async () => {
   server.events.on('response', (request) => {
     const { response } = request;
 
-    const statusCode = Boom.isBoom(response)
-      ? response.output.statusCode
-      : (response).statusCode;
+    const statusCode = Boom.isBoom(response) ? response.output.statusCode : response.statusCode;
 
     logger.info({
       event: 'request_completed',
