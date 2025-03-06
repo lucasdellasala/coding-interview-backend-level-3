@@ -9,6 +9,7 @@ Este repositorio contiene la solución al challenge de Backend que desarrollé, 
 - [Infraestructura en AWS](#infraestructura-en-aws)
 - [Justificación de Decisiones](#justificación-de-decisiones)
 - [Cómo Consultar el Challenge](#cómo-consultar-el-challenge)
+- [API](#API)
 
 ## Introducción
 
