@@ -62,6 +62,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ecs-taskdef.json
-          service: coding-interview-backend-level-3-service-alb
+          service: coding-interview-backend-level-3-service-alb2
           cluster: coding-interview-backend-level-3-cluster
           wait-for-service-stability: true
